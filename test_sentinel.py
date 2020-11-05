@@ -18,10 +18,10 @@ def redis_populate():
   #   ],sentinel_kwargs={'password': 'NotImPortAntPassWorD'})   
   from redis.sentinel import Sentinel
   sentinel = Sentinel([
-      ('192.168.77.130',26379),
-      ('192.168.77.130',26380),
-      ('192.168.77.130',26381),
-  ],sentinel_kwargs={'password': '123456'}) 
+      ('redis-cloudflare-node-0.redis-cloudflare-headless.dns-proxy.svc.cluster.local',26379),
+      ('redis-cloudflare-node-1.redis-cloudflare-headless.dns-proxy.svc.cluster.local',26380),
+      ('redis-cloudflare-node-2.redis-cloudflare-headless.dns-proxy.svc.cluster.local',26381),
+  ],sentinel_kwargs={'password': 'NotImPortAntPassWorD'}) 
 
   sentinel.discover_master('mymaster')
 
