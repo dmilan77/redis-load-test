@@ -22,7 +22,7 @@ def redis_populate(filepath):
     configs = load_config(filepath)
     # client = redis.StrictRedis(host=configs["redis_host"], port=configs["redis_port"])
     sentinel = Sentinel([(configs["redis_host"], configs["redis_port"])], socket_timeout=0.1)
-    sentinel.discover_master('mymaster')
+    # sentinel.discover_master('mymaster')
     client = sentinel.master_for('mymaster', socket_timeout=0.1)
     for i in range(100000):
         key='key'+str(i)
