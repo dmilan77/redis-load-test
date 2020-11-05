@@ -15,11 +15,7 @@ def redis_populate():
   # socket_timeout=0.1)
  
   from redis.sentinel import Sentinel
-  # sentinel = Sentinel([
-  #     ('redis-cloudflare-node-0.redis-cloudflare-headless.dns-proxy.svc.cluster.local',26379),
-  #     ('redis-cloudflare-node-1.redis-cloudflare-headless.dns-proxy.svc.cluster.local',26380),
-  #     ('redis-cloudflare-node-2.redis-cloudflare-headless.dns-proxy.svc.cluster.local',26381),
-  # ],sentinel_kwargs={'password': 'NotImPortAntPassWorD'}) 
+ 
   sentinel = Sentinel([
       ('redis-cloudflare',26379),
   ],sentinel_kwargs={'password': 'NotImPortAntPassWorD'},password='NotImPortAntPassWorD') 
@@ -30,8 +26,8 @@ def redis_populate():
   for i in range(100000):
       key='key'+str(i)
       value='value'+str(i)
-      client.set(key,value)
-      print(key,value)
+      result=client.get(key,value)
+      print(result)
 
 if __name__ == "__main__":
   redis_populate()
