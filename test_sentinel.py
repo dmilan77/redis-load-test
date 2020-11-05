@@ -13,14 +13,15 @@ def redis_populate():
   #     ("redis-cloudflare-node-2.redis-cloudflare-headless.dns-proxy.svc.cluster.local", 26379)
   #   ],     
   # socket_timeout=0.1)
-  #  sentinel = Sentinel([
-  #   ('redis-cloudflare:26379')
-  #   ],sentinel_kwargs={'password': 'NotImPortAntPassWorD'})   
+ 
   from redis.sentinel import Sentinel
+  # sentinel = Sentinel([
+  #     ('redis-cloudflare-node-0.redis-cloudflare-headless.dns-proxy.svc.cluster.local',26379),
+  #     ('redis-cloudflare-node-1.redis-cloudflare-headless.dns-proxy.svc.cluster.local',26380),
+  #     ('redis-cloudflare-node-2.redis-cloudflare-headless.dns-proxy.svc.cluster.local',26381),
+  # ],sentinel_kwargs={'password': 'NotImPortAntPassWorD'}) 
   sentinel = Sentinel([
-      ('redis-cloudflare-node-0.redis-cloudflare-headless.dns-proxy.svc.cluster.local',26379),
-      ('redis-cloudflare-node-1.redis-cloudflare-headless.dns-proxy.svc.cluster.local',26380),
-      ('redis-cloudflare-node-2.redis-cloudflare-headless.dns-proxy.svc.cluster.local',26381),
+      ('redis-cloudflare',26379),
   ],sentinel_kwargs={'password': 'NotImPortAntPassWorD'}) 
 
   sentinel.discover_master('mymaster')
