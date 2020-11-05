@@ -1,10 +1,11 @@
-#!/usr/bin/python3
+
 ## pylint: disable = invalid-name
 """
 This is a script to set key in Redis Server for load testing.
 
 Author:- OpsTree Solutions
 """
+from redis.sentinel import Sentinel
 
 import argparse
 import json
@@ -19,7 +20,10 @@ def load_config(filepath):
 def redis_populate(filepath):
     """Function to populate keys in Redis Server"""
     configs = load_config(filepath)
-    client = redis.StrictRedis(host=configs["redis_host"], port=configs["redis_port"])
+    # client = redis.StrictRedis(host=configs["redis_host"], port=configs["redis_port"])
+    sentinel = Sentinel([(configs["redis_host"], configs["redis_port"])], socket_timeout=0.1)
+    sentinel.discover_master('mymaster')
+    client = sentinel.master_for('mymaster', socket_timeout=0.1)
     for i in range(100000):
         key='key'+str(i)
         value='value'+str(i)
