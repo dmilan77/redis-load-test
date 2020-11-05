@@ -1,0 +1,5 @@
+{
+    "redis_host": "10.0.50.247",
+    "redis_port": "26379",
+    "redis_password": "NotImPortAntPassWorD"
+}
