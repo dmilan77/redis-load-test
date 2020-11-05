@@ -26,7 +26,7 @@ def redis_populate():
   for i in range(100000):
       key='key'+str(i)
       value='value'+str(i)
-      result=client.get(key,value)
+      result=client.get(key)
       print(result)
 
 if __name__ == "__main__":
