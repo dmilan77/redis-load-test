@@ -22,7 +22,7 @@ def redis_populate():
   # ],sentinel_kwargs={'password': 'NotImPortAntPassWorD'}) 
   sentinel = Sentinel([
       ('redis-cloudflare',26379),
-  ],sentinel_kwargs={'password': 'NotImPortAntPassWorD'}) 
+  ],sentinel_kwargs={'password': 'NotImPortAntPassWorD'},password='NotImPortAntPassWorD') 
 
   sentinel.discover_master('mymaster')
 
