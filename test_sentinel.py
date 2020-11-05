@@ -13,11 +13,16 @@ def redis_populate():
   #     ("redis-cloudflare-node-2.redis-cloudflare-headless.dns-proxy.svc.cluster.local", 26379)
   #   ],     
   # socket_timeout=0.1)
-  # sentinel = Sentinel(["redis-cloudflare:26379"], socket_timeout = None, sentinel_kwargs={'password': 'NotImPortAntPassWorD'})
-  # password="NotImPortAntPassWorD", sentinel_kwargs={"password": "NotImPortAntPassWorD"})
+  #  sentinel = Sentinel([
+  #   ('redis-cloudflare:26379')
+  #   ],sentinel_kwargs={'password': 'NotImPortAntPassWorD'})   
+  from redis.sentinel import Sentinel
   sentinel = Sentinel([
-    ('redis-cloudflare:26379')
-    ],sentinel_kwargs={'password': 'NotImPortAntPassWorD'})   
+      ('192.168.77.130',26379),
+      ('192.168.77.130',26380),
+      ('192.168.77.130',26381),
+  ],sentinel_kwargs={'password': '123456'}) 
+
   sentinel.discover_master('mymaster')
 
   client = sentinel.master_for('mymaster', socket_timeout=0.5)
