@@ -23,7 +23,7 @@ def redis_populate():
   sentinel.discover_master('mymaster')
 
   client = sentinel.master_for('mymaster', socket_timeout=0.5)
-  for i in range(100000):
+  for i in range(10000000):
       key='key'+str(i)
       value='value'+str(i)
       result=client.get(key)
