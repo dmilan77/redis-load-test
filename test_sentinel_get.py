@@ -24,7 +24,7 @@ def redis_populate():
   # sentinel.discover_master('mymaster')
 
   # client = sentinel.master_for('mymaster', socket_timeout=0.5)
-  client = redis.StrictRedis(host='redis-cloudflare', port=por26379t, password='NotImPortAntPassWorD')
+  client = redis.StrictRedis(host='redis-cloudflare', port=26379, password='NotImPortAntPassWorD')
 
   for i in range(1000000):
       key='key'+str(i)
