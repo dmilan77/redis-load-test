@@ -1,4 +1,5 @@
 from redis.sentinel import Sentinel
+import redis
 
 
 
@@ -16,13 +17,15 @@ def redis_populate():
  
   from redis.sentinel import Sentinel
  
-  sentinel = Sentinel([
-      ('redis-cloudflare',26379),
-  ],sentinel_kwargs={'password': 'NotImPortAntPassWorD'},password='NotImPortAntPassWorD') 
+  # sentinel = Sentinel([
+  #     ('redis-cloudflare',26379),
+  # ],sentinel_kwargs={'password': 'NotImPortAntPassWorD'},password='NotImPortAntPassWorD') 
 
-  sentinel.discover_master('mymaster')
+  # sentinel.discover_master('mymaster')
 
-  client = sentinel.master_for('mymaster', socket_timeout=0.5)
+  # client = sentinel.master_for('mymaster', socket_timeout=0.5)
+  client = redis.StrictRedis(host='redis-cloudflare', port=por26379t, password='NotImPortAntPassWorD')
+
   for i in range(1000000):
       key='key'+str(i)
       result=client.get(key)
